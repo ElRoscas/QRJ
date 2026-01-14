@@ -30,9 +30,6 @@ ReadQR.php #worker
 //PERFILS
 view_user.php
 
-
-
-
  OPCIONS:
     1.VEURE PERF/GEST USUARI 5
     2.GESTIONAR CONVIDATS
@@ -62,6 +59,8 @@ menu->1|2|3|4|5
 #Worker !PERM
 #User->List-esdvn.php->view-esdvn.php
 
+4
+#ADMIN->create-esdv.php
 
 menu->view_myuser.php
 menu->index
