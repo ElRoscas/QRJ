@@ -1,0 +1,227 @@
+/* --- CONFIGURACIÓ GENERAL --- */
+body, html {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    font-family: 'Arial Black', sans-serif;
+    background-color: #0d1117;
+}
+
+.desktop-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.main-container {
+    width: 1050px;
+    height: 650px;
+    display: flex;
+    background-color: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+    transition: all 0.3s ease;
+}
+
+/* --- PANEL ESQUERRE --- */
+.left-panel {
+    flex: 1.2;
+    background-image: 
+        linear-gradient(rgba(59, 78, 141, 0.8), rgba(59, 78, 141, 0.8)), 
+        url('../fondos.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    padding-left: 50px;
+    position: relative;
+    z-index: 1;
+}
+
+.main-title {
+    color: #000;
+    font-size: 3.2rem;
+    font-weight: 900;
+    margin: 0;
+    line-height: 0.9;
+    position: relative;
+    z-index: 2;
+}
+
+.floating-star {
+    width: 70px;
+    position: absolute;
+    top: -5px;
+    right: -35px;
+    z-index: -1;
+    transform: rotate(15deg);
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+}
+
+.admin-subtitle {
+    color: #fff;
+    font-size: 1.3rem;
+    margin-top: 30px;
+    text-transform: uppercase;
+}
+
+/* --- PANEL DRET --- */
+.right-panel {
+    flex: 1;
+    background-color: #FFF; 
+    padding: 40px;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-box {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.menu-title {
+    font-size: 3rem;
+    color: #000;
+    margin-bottom: 40px;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.menu-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.icon-card {
+    background-color: #c5ae66;
+    width: 100px;
+    height: 100px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    color: #333;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.icon-card:hover {
+    transform: scale(1.1);
+}
+
+/* ESTILS BLOQUEJATS (GRIS) */
+.menu-item.disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.icon-card.gray {
+    background-color: #b0b0b0 !important;
+    color: #666 !important;
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+.icon-card.gray:hover {
+    transform: none;
+}
+
+.menu-item p {
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin: 0;
+    color: #000;
+}
+
+.menu-item.disabled p {
+    color: #888;
+}
+
+.footer-nav {
+    margin-top: auto;
+    width: 100%;
+    padding-top: 20px;
+}
+
+.back-btn {
+    color: white;
+    text-decoration: none;
+    font-size: 0.8rem;
+    background: black;
+    padding: 8px 15px;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+/* --- ADAPTACIÓ RESPONSIVE --- */
+
+/* Per a Tauletes i Mòbils grans */
+@media (max-width: 1024px) {
+    .main-container {
+        width: 90%;
+        height: auto;
+        flex-direction: column; /* Apilar panells */
+    }
+
+    .left-panel {
+        padding: 50px 0;
+        justify-content: center;
+        text-align: center;
+        padding-left: 0;
+        min-height: 250px;
+    }
+
+    .floating-star {
+        right: 0;
+        left: 60%;
+    }
+}
+
+/* Per a Mòbils petits */
+@media (max-width: 480px) {
+    .main-title {
+        font-size: 2.2rem;
+    }
+
+    .menu-title {
+        font-size: 2.5rem;
+    }
+
+    .menu-grid {
+        grid-template-columns: 1fr; /* Una sola columna d'icones */
+        gap: 20px;
+    }
+
+    .icon-card {
+        width: 85px;
+        height: 85px;
+        font-size: 2.5rem;
+    }
+    
+    .footer-nav {
+        justify-content: center;
+        display: flex;
+    }
+}
+
+.bg-star { position: absolute; color: rgba(255, 255, 255, 0.1); z-index: 1; pointer-events: none; }

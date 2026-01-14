@@ -1,0 +1,122 @@
+/* --- CONFIGURACIÓ GENERAL --- */
+body, html {
+    margin: 0; padding: 0; min-height: 100%;
+    font-family: 'Arial Black', sans-serif;
+    background-color: #0d1117;
+}
+
+.desktop-wrapper { 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    min-height: 100vh; 
+    padding: 15px; 
+}
+
+.main-container {
+    width: 1050px; 
+    min-height: 650px; 
+    display: flex;
+    background-color: #fff; 
+    border-radius: 20px;
+    overflow: hidden; 
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+    transition: all 0.3s ease;
+}
+
+/* --- PANEL ESQUERRE --- */
+.left-panel {
+    flex: 1.2; 
+    position: relative; 
+    display: flex; 
+    align-items: center; 
+    padding-left: 50px;
+    background-image: linear-gradient(rgba(59, 78, 141, 0.8), rgba(59, 78, 141, 0.8)), url('../fondos.png');
+    background-size: cover;
+}
+
+.main-title { color: #000; font-size: 3.2rem; font-weight: 900; margin: 0; line-height: 0.9; position: relative; z-index: 2; }
+
+.floating-star {
+    width: 70px; position: absolute; top: -5px; right: -35px;
+    z-index: -1; transform: rotate(15deg);
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+}
+
+.admin-subtitle { color: #fff; font-size: 1.3rem; margin-top: 30px; text-transform: uppercase; }
+
+/* --- PANEL DRET --- */
+.right-panel { 
+    flex: 1; 
+    padding: 30px 40px; 
+    display: flex; 
+    flex-direction: column; 
+    background-color: #fff;
+}
+
+.form-heading-black {
+    font-size: 2.2rem;
+    color: #000;
+    text-align: center;
+    margin-bottom: 25px;
+    line-height: 1;
+}
+
+.user-selector-container { margin-bottom: 25px; text-align: left; }
+
+.user-dropdown {
+    background-color: #c5ae66; color: #000;
+    font-family: 'Arial Black', sans-serif; font-weight: 900;
+    padding: 10px 20px; border-radius: 20px; border: none;
+    width: 100%; cursor: pointer; appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 15px center; background-size: 15px;
+}
+
+.user-data-list { text-align: left; margin-bottom: 25px; }
+.user-data-list p { color: #000; font-size: 1.1rem; margin: 12px 0; font-weight: bold; }
+
+.section-title { text-align: left; text-decoration: underline; font-size: 1.1rem; margin-bottom: 15px; }
+
+.event-tags { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+
+.tag {
+    background-color: rgba(197, 174, 102, 0.5); color: #000;
+    padding: 8px 25px; border-radius: 20px; font-weight: bold;
+    min-width: 150px; text-align: center;
+}
+
+.info-actions { margin-top: auto; text-align: center; display: flex; flex-direction: column; gap: 15px; align-items: center; }
+
+.edit-btn {
+    background-color: #d1d1d1; border: none; padding: 10px 40px;
+    border-radius: 12px; font-family: 'Arial Black', sans-serif;
+    font-weight: 900; font-size: 1rem; cursor: pointer; width: 100%; max-width: 250px;
+}
+
+.back-pill {
+    display: inline-block; background: #000; color: #fff;
+    text-decoration: none; padding: 8px 30px; border-radius: 20px; font-size: 0.8rem;
+}
+
+/* --- RESPONSIVE --- */
+
+@media (max-width: 1024px) {
+    .main-container { width: 100%; height: auto; flex-direction: column; }
+    .left-panel {
+        padding: 50px 20px; justify-content: center; text-align: center;
+        min-height: 250px; flex: none;
+    }
+    .main-title { font-size: 2.5rem; }
+    .floating-star { width: 55px; right: 0; left: 60%; }
+    .right-panel { padding: 30px 20px; }
+}
+
+@media (max-width: 480px) {
+    .main-title { font-size: 2rem; }
+    .form-heading-black { font-size: 1.8rem; }
+    .user-data-list p { font-size: 0.95rem; }
+    .tag { width: 100%; box-sizing: border-box; }
+}
+
+.bg-star { position: absolute; color: rgba(255, 255, 255, 0.15); z-index: 1; pointer-events: none; }

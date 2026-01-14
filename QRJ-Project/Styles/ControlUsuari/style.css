@@ -1,0 +1,219 @@
+/* --- CONFIGURACIÓ GENERAL --- */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Arial Black', sans-serif;
+    background-color: #0d1117;
+}
+
+.desktop-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.main-container {
+    width: 1050px;
+    height: 650px;
+    display: flex;
+    background-color: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+    transition: all 0.3s ease;
+}
+
+/* --- PANEL ESQUERRE --- */
+.left-panel {
+    flex: 1.2;
+    background-image: linear-gradient(rgba(59, 78, 141, 0.8), rgba(59, 78, 141, 0.8)), url('../fondos.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    padding-left: 50px;
+    position: relative;
+}
+
+.main-title {
+    color: #000;
+    font-size: 3.2rem;
+    font-weight: 900;
+    margin: 0;
+    line-height: 0.9;
+    position: relative;
+    z-index: 2;
+}
+
+.floating-star {
+    width: 70px;
+    position: absolute;
+    top: -5px;
+    right: -35px;
+    z-index: -1;
+    transform: rotate(15deg);
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+}
+
+.admin-subtitle {
+    color: #fff;
+    font-size: 1.3rem;
+    margin-top: 30px;
+    text-transform: uppercase;
+}
+
+/* --- PANEL DRET --- */
+.right-panel {
+    flex: 1;
+    padding: 30px 40px;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+}
+
+.form-heading-black {
+    font-size: 2.2rem;
+    color: #000;
+    text-align: center;
+    margin-bottom: 25px;
+    line-height: 1;
+}
+
+.search-bar-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.search-input {
+    background-color: #2d3b76;
+    color: #a5b1d9;
+    padding: 10px 15px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+}
+
+.clean-select, .clean-input {
+    background: transparent;
+    border: none;
+    color: #a5b1d9;
+    font-family: 'Arial Black', sans-serif;
+    font-size: 0.8rem;
+    width: 90%;
+    outline: none;
+}
+
+.user-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+    overflow-y: auto;
+}
+
+.user-entry {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+.user-name-tag {
+    background-color: #c5ae66;
+    color: #000;
+    font-weight: 900;
+    padding: 10px 25px;
+    border-radius: 20px;
+    min-width: 200px;
+}
+
+.info-btn {
+    background-color: #a5c7f7;
+    border: none;
+    padding: 5px 20px;
+    border-radius: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.actions-container {
+    text-align: center;
+    margin-top: auto;
+}
+
+.create-user-btn {
+    background-color: #d1d1d1;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 15px;
+    font-weight: 900;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.back-pill {
+    display: inline-block;
+    background: #000;
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
+
+/* --- ADAPTACIÓ RESPONSIVE --- */
+
+@media (max-width: 1024px) {
+    .main-container {
+        width: 100%;
+        height: auto;
+        flex-direction: column;
+    }
+
+    .left-panel {
+        padding: 50px 20px;
+        justify-content: center;
+        text-align: center;
+        min-height: 250px;
+        flex: none;
+    }
+
+    .main-title { font-size: 2.5rem; }
+    
+    .floating-star {
+        width: 55px;
+        right: 0;
+        left: 60%;
+    }
+
+    .right-panel {
+        padding: 30px 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .search-bar-container {
+        flex-direction: column; /* Apila els cercadors */
+    }
+
+    .user-name-tag {
+        min-width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+    }
+
+    .user-entry {
+        width: 100%;
+        align-items: center;
+    }
+}
+
+/* Estrelles ambientals JS */
+.bg-star { position: absolute; color: rgba(255, 255, 255, 0.15); z-index: 1; pointer-events: none; }
