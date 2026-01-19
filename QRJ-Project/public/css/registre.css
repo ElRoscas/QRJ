@@ -29,9 +29,7 @@ body, html {
 /* --- PANEL ESQUERRE --- */
 .left-panel {
     flex: 1.2;
-    background-image: 
-        linear-gradient(rgba(59, 78, 141, 0.8), rgba(59, 78, 141, 0.8)), 
-        url('../fondos.png');
+    background-image: linear-gradient(rgba(59, 78, 141, 0.8), rgba(59, 78, 141, 0.8)), url('/fondos.png');
     background-size: cover;
     background-position: center;
     display: flex;
@@ -85,10 +83,7 @@ body, html {
     margin-bottom: 20px;
 }
 
-.input-group {
-    margin-bottom: 12px;
-}
-
+.input-group { margin-bottom: 12px; }
 .input-group label {
     display: block;
     font-size: 0.85rem;
@@ -139,8 +134,6 @@ body, html {
 }
 
 /* --- ADAPTACIÓ RESPONSIVE --- */
-
-/* Per a Tauletes i ordinadors petits */
 @media (max-width: 1024px) {
     .main-container {
         width: 100%;
@@ -149,20 +142,15 @@ body, html {
     .main-title { font-size: 2.8rem; }
 }
 
-/* Per a Mòbils (Canvi d'estructura) */
 @media (max-width: 768px) {
     .main-container {
-        flex-direction: column; /* Apilar un sobre l'altre */
+        flex-direction: column;
         height: auto;
         min-height: 100vh;
         width: 100%;
         border-radius: 0;
     }
-
-    .desktop-wrapper {
-        padding: 0; /* Aprofitem tota la pantalla */
-    }
-
+    .desktop-wrapper { padding: 0; }
     .left-panel {
         padding: 60px 20px;
         justify-content: center;
@@ -170,23 +158,9 @@ body, html {
         flex: none;
         min-height: 250px;
     }
-
-    .floating-star {
-        width: 50px;
-        right: 0px;
-        top: -5px;
-    }
-
+    .floating-star { width: 50px; right: 0; top: -5px; }
     .main-title { font-size: 2.2rem; }
-    .admin-subtitle { font-size: 1.1rem; }
-
-    .right-panel {
-        padding: 40px 20px;
-        flex: none;
-    }
-
-    .form-heading-black { font-size: 2rem; }
+    .right-panel { padding: 40px 20px; flex: none; }
 }
 
-/* Estrelles ambientals JS */
 .bg-star { position: absolute; color: rgba(255, 255, 255, 0.15); z-index: 1; pointer-events: none; }
