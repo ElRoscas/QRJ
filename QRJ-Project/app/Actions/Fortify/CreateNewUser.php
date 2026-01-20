@@ -24,16 +24,17 @@ class CreateNewUser implements CreatesNewUsers
                 'required',
                 'string',
                 'email',
-                'max:255',
-                Rule::unique(User::class),
+                'max:100',
+                Rule::unique('usuari', 'Correu'),
             ],
             'password' => $this->passwordRules(),
         ])->validate();
 
         return User::create([
-            'name' => $input['name'],
-            'email' => $input['email'],
-            'password' => $input['password'],
+            'Nom' => $input['name'],
+            'Correu' => $input['email'],
+            'Contrasenya' => $input['password'],
+            'Curs' => null, // Opcional, puedes añadir un campo en el formulario si lo necesitas
         ]);
     }
 }

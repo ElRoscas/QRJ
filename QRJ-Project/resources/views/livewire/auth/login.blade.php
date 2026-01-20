@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ca">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -212,13 +213,14 @@
         }
     </style>
 </head>
+
 <body>
     <div class="desktop-wrapper">
         <div class="main-container">
             <div class="left-panel">
                 <div class="brand-content">
                     <h1 class="main-title">
-                        LA SALLE 
+                        LA SALLE
                         <img src="{{ asset('images/estrella.png') }}" class="floating-star" alt="★">
                     </h1>
                     <h1 class="main-title">MOLLERUSSA</h1>
@@ -246,33 +248,19 @@
                         </div>
                     @endif
 
-                    <form method="POST" action="{{ route('login.store') }}">
+                    <form method="POST" action="{{ route('fortify.login') }}">
                         @csrf
 
                         <div class="form-group">
                             <label for="email">Correu electrònic</label>
-                            <input 
-                                type="email" 
-                                id="email" 
-                                name="email" 
-                                value="{{ old('email') }}"
-                                required 
-                                autofocus 
-                                autocomplete="email"
-                                placeholder="email@example.com"
-                            >
+                            <input type="email" id="email" name="email" value="{{ old('email') }}" required autofocus
+                                autocomplete="email" placeholder="email@example.com">
                         </div>
 
                         <div class="form-group">
                             <label for="password">Contrasenya</label>
-                            <input 
-                                type="password" 
-                                id="password" 
-                                name="password" 
-                                required 
-                                autocomplete="current-password"
-                                placeholder="Contrasenya"
-                            >
+                            <input type="password" id="password" name="password" required
+                                autocomplete="current-password" placeholder="Contrasenya">
                         </div>
 
                         @if (Route::has('password.request'))
@@ -299,4 +287,5 @@
         </div>
     </div>
 </body>
+
 </html>
