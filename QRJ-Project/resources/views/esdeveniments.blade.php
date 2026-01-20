@@ -39,7 +39,7 @@
                     </div>
 
                     <div class="footer-nav">
-                        <a href="{{ route('menu.admin') }}" class="back-pill"> < Tornar enrere</a>
+                        <a href="{{ route('preview.menu_admin') }}" class="back-pill"> < Tornar enrere</a>
                     </div>
                 </div>
             </div>

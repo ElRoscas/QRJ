@@ -217,14 +217,19 @@
 <body>
     <div class="desktop-wrapper">
         <div class="main-container">
-            <div class="left-panel">
+            <div class="left-panel" id="starContainer">
                 <div class="brand-content">
                     <h1 class="main-title">
+<<<<<<< Updated upstream
                         LA SALLE
                         <img src="{{ asset('images/estrella.png') }}" class="floating-star" alt="★">
+=======
+                        LA SALLE 
+                        <img src="{{ asset('estrella.png') }}" class="star-img" alt="estrella">
+>>>>>>> Stashed changes
                     </h1>
                     <h1 class="main-title">MOLLERUSSA</h1>
-                    <h2 class="admin-subtitle">GESTIÓ D'ESDEVENIMENTS</h2>
+                    <h2 class="admin-subtitle">ADMINISTRADOR D'ESDEVENIMENTS</h2>
                 </div>
             </div>
 

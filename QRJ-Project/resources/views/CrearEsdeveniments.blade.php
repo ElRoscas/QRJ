@@ -82,7 +82,11 @@
                     </form>
 
                     <div class="back-link-container">
+<<<<<<< Updated upstream
                         <a href="{{ route('menu.admin') }}" class="back-link">
+=======
+                        <a href="{{ route('preview.menu_admin') }}" class="back-link">
+>>>>>>> Stashed changes
                             <span class="arrow">←</span> Tornar enrere
                         </a>
                     </div>

@@ -13,7 +13,7 @@
                 <div class="brand-content">
                     <h1 class="main-title">
                         LA SALLE 
-                        <img src="{{ asset('images/estrella.png') }}" class="floating-star" alt="estrella">
+                        <img src="{{ asset('estrella.png') }}" class="star-img" alt="estrella">
                     </h1>
                     <h1 class="main-title">MOLLERUSSA</h1>
                     <h2 class="admin-subtitle">ADMINISTRADOR D'ESDEVENIMENTS</h2>
@@ -22,10 +22,10 @@
 
             <div class="right-panel">
                 <div class="menu-box-content">
-                    <h1 class="menu-title">MENÚ <span class="star-accent-inline">★</span></h1>
+                    <h1 class="menu-title">MENÚ <span class="star-accent-inline"></span></h1>
                     
                     <div class="menu-grid">
-                        <div class="menu-item" onclick="location.href='{{ route('esdeveniments') }}'">
+                        <div class="menu-item" onclick="location.href='{{ route('evenimente') }}'">
                             <div class="icon-card">📅</div>
                             <p>Esdeveniments</p>
                         </div>

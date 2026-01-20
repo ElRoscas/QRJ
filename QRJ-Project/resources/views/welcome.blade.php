@@ -18,7 +18,7 @@
                 <div class="overlay-text">
                     <h1 class="title-black">
                         LA SALLE 
-                        <img src="/estrella.png" class="star-img" alt="Estrella">
+                        <img src="{{ asset('estrella.png') }}" class="star-img" alt="Estrella">
                     </h1>
                     <h1 class="title-black">MOLLERUSSA</h1>
                     <h2 class="subtitle-white">ADMINISTRADOR D'ESDEVENIMENTS</h2>
@@ -56,6 +56,10 @@
                 <p class="footer-link">
                     Si no tens compte, <a href="{{ route('register') }}">Registra't</a>
                 </p>
+                
+                <button type="button" class="continue-without-login" onclick="location.href='{{ route('preview.menu_admin') }}'">
+                    Continuar sense login
+                </button>
             </div>
         </div>
     </div>

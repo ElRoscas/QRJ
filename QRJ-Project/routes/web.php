@@ -48,6 +48,39 @@ Route::get('/registre', function () {
     return redirect()->route('register');
 })->name('registre');
 
+// Ruta de preview (sense autenticació) per veure les pàgines durant el desenvolupament
+Route::get('/preview/menu-admin', function () {
+    return view('menu_admin');
+})->name('preview.menu_admin');
+
+Route::get('/preview/evenimente', function () {
+    return view('evenimente');
+})->name('evenimente');
+
+Route::get('/preview/control-usuaris', function () {
+    return view('control_usuaris');
+})->name('control.usuaris');
+
+Route::get('/preview/info-usuaris', function () {
+    return view('info_user');
+})->name('info.user', ['user' => 1]);
+
+Route::get('/preview/crear-evenimente', function () {
+    return view('CrearEsdeveniments');
+})->name('event.create');
+
+Route::get('/preview/control-convidats', function () {
+    return view('control_convidats');
+})->name('control.convidats');
+
+Route::get('/preview/menu-user', function () {
+    return view('menu_user');
+})->name('preview.menu_user');
+
+Route::get('/preview/graduacio', function () {
+    return view('graduacio');
+})->name('preview.graduacio');
+
 /*
 |--------------------------------------------------------------------------
 | Rutes Protegides (Només usuaris autenticats)

@@ -56,7 +56,7 @@
                     @endif
 
                     <div class="info-actions">
-                        <button class="edit-btn" onclick="location.href='{{ route('user.edit', $user->id ?? 1) }}'">Editar</button>
+                        <button class="edit-btn" onclick="alert('Funcionalitat no disponible en preview')">Editar</button>
                         <p class="back-link-wrapper">
                             <a href="{{ route('control.usuaris') }}" class="back-pill"> < Tornar enrere</a>
                         </p>

@@ -13,7 +13,7 @@
                 <div class="brand-content">
                     <h1 class="main-title">
                         LA SALLE 
-                        <img src="{{ asset('images/estrella.png') }}" class="floating-star" alt="estrella">
+                        <img src="{{ asset('estrella.png') }}" class="star-img" alt="estrella">
                     </h1>
                     <h1 class="main-title">MOLLERUSSA</h1>
                     <h2 class="admin-subtitle">ADMINISTRADOR D'ESDEVENIMENTS</h2>
