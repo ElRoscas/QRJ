@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/png" href="{{ asset('estrella.png') }}">
+    
+    <link rel="apple-touch-icon" href="{{ asset('estrella.png') }}">
     <title>Registre - La Salle Mollerussa</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
@@ -69,7 +72,7 @@
             height: auto;
             position: absolute;
             top: -10px; 
-            right: -40px; /* Ajustat per quedar al costat de la lletra E */
+            right: 35px; /* Ajustat per quedar al costat de la lletra E */
             transform: rotate(10deg);
             filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
         }
