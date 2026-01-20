@@ -4,276 +4,199 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registre - La Salle Mollerussa</title>
-    @vite(['resources/css/app.css', 'resources/css/registre.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* --- CONFIGURACIÓ GENERAL --- */
+        body, html {
+            margin: 0; 
+            padding: 0; 
+            height: 100%;
+            font-family: 'Arial Black', sans-serif; /* Font gruixuda per al títol */
+            background-color: #0d1117; /* Fons fosc de l'aplicació */
         }
 
         .desktop-wrapper {
-            width: 100%;
-            max-width: 1200px;
-            padding: 20px;
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+            min-height: 100vh; 
+            padding: 15px;
         }
 
         .main-container {
+            width: 1000px; 
+            height: 600px; 
             display: flex;
-            background: white;
+            background-color: white; 
             border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            min-height: 600px;
+            overflow: hidden; 
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
         }
 
-        .left-panel {
-            flex: 1;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 60px 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
+        /* --- PANEL ESQUERRE --- */
+        .left-side {
+            flex: 1.3; 
+            position: relative; 
+            display: flex; 
+            align-items: center; 
+            padding-left: 50px;
+            background-color: #3b4e8d;
+            /* Gradient blau semi-transparent sobre la imatge fondos.png */
+            background-image: linear-gradient(rgba(59, 78, 141, 0.8), rgba(59, 78, 141, 0.8)), 
+                              url("{{ asset('fondos.png') }}");
+            background-size: cover; 
+            background-position: center;
         }
 
         .brand-content {
-            text-align: center;
-            z-index: 2;
+            position: relative;
+            z-index: 10;
         }
 
         .main-title {
-            font-size: 48px;
-            font-weight: bold;
-            color: white;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
+            color: #000; 
+            font-size: 3.5rem; 
+            font-weight: 900;
+            margin: 0; 
+            line-height: 0.9; 
+            text-transform: uppercase;
+            position: relative;
         }
 
-        .floating-star {
-            width: 40px;
-            height: 40px;
-            filter: brightness(0) invert(1);
+        /* L'estrella penjant al costat del títol */
+        .star-img {
+            width: 70px; 
+            height: auto;
+            position: absolute;
+            top: -10px; 
+            right: -40px; /* Ajustat per quedar al costat de la lletra E */
+            transform: rotate(10deg);
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
         }
 
         .admin-subtitle {
-            font-size: 18px;
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: 300;
-            margin-top: 20px;
-            letter-spacing: 2px;
+            color: #fff; 
+            font-size: 1.4rem; 
+            margin-top: 30px; 
+            text-transform: uppercase;
+            font-family: 'Segoe UI', sans-serif;
+            font-weight: 800;
+            letter-spacing: 1px;
         }
 
-        .right-panel {
-            flex: 1;
-            padding: 60px 50px;
-            display: flex;
+        /* --- PANEL DRET --- */
+        .right-side {
+            flex: 1; 
+            padding: 40px 60px; 
+            display: flex; 
             flex-direction: column;
-            justify-content: center;
+            justify-content: center; 
+            background-color: #ffffff;
         }
 
-        .register-box h1 {
-            font-size: 32px;
-            color: #333;
-            margin-bottom: 30px;
-            font-weight: bold;
+        .form-title { 
+            font-size: 2rem; 
+            color: #1a1a1a; 
+            margin-bottom: 30px; 
+            font-weight: 900;
         }
 
-        .form-group {
-            margin-bottom: 20px;
+        .form-group { margin-bottom: 20px; }
+        .form-group label { 
+            display: block; 
+            font-size: 0.85rem; 
+            font-weight: bold; 
+            margin-bottom: 8px; 
+            color: #444; 
         }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #555;
-            font-weight: 500;
+        .form-group input { 
+            width: 100%; 
+            padding: 12px 15px; 
+            border: 1px solid #ddd; 
+            border-radius: 8px; 
+            box-sizing: border-box; 
             font-size: 14px;
         }
 
-        .form-group input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 14px;
-            transition: all 0.3s;
+        .divider { 
+            text-align: center; 
+            font-size: 0.75rem; 
+            color: #888; 
+            margin: 20px 0 15px; 
+            text-transform: uppercase; 
+            font-weight: 800;
         }
 
-        .form-group input:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        .google-btn {
+            width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 25px;
+            background: white; cursor: pointer; display: flex; align-items: center;
+            justify-content: center; gap: 12px; font-weight: 600; color: #555;
+            transition: background 0.2s;
+        }
+        .google-btn img { width: 18px; }
+
+        .submit-btn {
+            background: linear-gradient(to right, #003366 0%, #003366 45%, #ffcc00 100%);
+            color: white; border: none; padding: 15px; border-radius: 30px;
+            font-weight: 900; cursor: pointer; width: 100%; margin-top: 20px; 
+            font-size: 1rem; text-transform: uppercase;
         }
 
-        .register-btn {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 10px;
-        }
+        .footer-link { text-align: center; font-size: 0.9rem; margin-top: 25px; font-weight: 700; }
+        .footer-link a { color: #008cff; text-decoration: none; }
 
-        .register-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        .login-link {
-            text-align: center;
-            margin-top: 25px;
-            color: #666;
-            font-size: 14px;
-        }
-
-        .login-link a {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .login-link a:hover {
-            text-decoration: underline;
-        }
-
-        .error-message {
-            background-color: #fee;
-            border: 1px solid #fcc;
-            color: #c33;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            font-size: 14px;
-        }
-
-        .success-message {
-            background-color: #efe;
-            border: 1px solid #cfc;
-            color: #3c3;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            font-size: 14px;
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .main-container { flex-direction: column; height: auto; width: 95%; }
+            .left-side { padding: 50px 20px; justify-content: center; text-align: center; min-height: 250px; }
+            .star-img { width: 45px; position: static; display: inline-block; vertical-align: middle; margin-left: 10px; }
+            .main-title { font-size: 2.5rem; }
         }
     </style>
 </head>
 <body>
+
     <div class="desktop-wrapper">
         <div class="main-container">
-            <div class="left-panel">
+            <div class="left-side">
                 <div class="brand-content">
                     <h1 class="main-title">
-                        LA SALLE 
-                        <img src="{{ asset('images/estrella.png') }}" class="floating-star" alt="★">
+                        LA SALLE<br>MOLLERUSSA
+                        <img src="{{ asset('estrella.png') }}" class="star-img" alt="Estrella">
                     </h1>
-                    <h1 class="main-title">MOLLERUSSA</h1>
-                    <h2 class="admin-subtitle">GESTIÓ D'ESDEVENIMENTS</h2>
+                    <h2 class="admin-subtitle">ADMINISTRADOR D'ESDEVENIMENTS</h2>
                 </div>
             </div>
 
-            <div class="right-panel">
-                <div class="register-box">
-                    <h1>CREAR COMPTE</h1>
+            <div class="right-side">
+                <div class="login-box">
+                    <h1 class="form-title">Registre</h1>
 
-                    <!-- Session Status -->
-                    @if (session('status'))
-                        <div class="success-message">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    <!-- Validation Errors -->
-                    @if ($errors->any())
-                        <div class="error-message">
-                            @foreach ($errors->all() as $error)
-                                <div>{{ $error }}</div>
-                            @endforeach
-                        </div>
-                    @endif
-
-                    <form method="POST" action="{{ route('register.store') }}">
+                    <form method="POST" action="{{ route('login') }}">
                         @csrf
-
                         <div class="form-group">
-                            <label for="name">Nom complet</label>
-                            <input 
-                                type="text" 
-                                id="name" 
-                                name="name" 
-                                value="{{ old('name') }}"
-                                required 
-                                autofocus 
-                                autocomplete="name"
-                                placeholder="Nom complet"
-                            >
+                            <label>Nom d'usuari o correu electrònic</label>
+                            <input type="text" name="login" required placeholder="Ex: alumne@lasalle.cat">
                         </div>
 
                         <div class="form-group">
-                            <label for="email">Correu electrònic</label>
-                            <input 
-                                type="email" 
-                                id="email" 
-                                name="email" 
-                                value="{{ old('email') }}"
-                                required 
-                                autocomplete="email"
-                                placeholder="email@example.com"
-                            >
+                            <label>Contrasenya</label>
+                            <input type="password" name="password" required placeholder="••••••••">
                         </div>
 
-                        <div class="form-group">
-                            <label for="password">Contrasenya</label>
-                            <input 
-                                type="password" 
-                                id="password" 
-                                name="password" 
-                                required 
-                                autocomplete="new-password"
-                                placeholder="Contrasenya"
-                            >
+                                                <div class="form-group">
+                            <label> Repetir Contrasenya</label>
+                            <input type="password" name="password" required placeholder="••••••••">
                         </div>
 
-                        <div class="form-group">
-                            <label for="password_confirmation">Confirmar contrasenya</label>
-                            <input 
-                                type="password" 
-                                id="password_confirmation" 
-                                name="password_confirmation" 
-                                required 
-                                autocomplete="new-password"
-                                placeholder="Confirmar contrasenya"
-                            >
-                        </div>
-
-                        <button type="submit" class="register-btn">Crear Compte</button>
+                        <button type="submit" class="submit-btn">Registra't</button>
                     </form>
 
-                    <div class="login-link">
-                        Ja tens compte? <a href="{{ route('login') }}">Inicia sessió aquí</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 </body>
 </html>
