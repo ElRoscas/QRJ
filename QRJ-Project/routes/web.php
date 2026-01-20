@@ -26,6 +26,14 @@ Route::post('/login', [AuthenticatedSessionController::class, 'store'])
     ->middleware('guest')
     ->name('fortify.login');
 
+// Logout via GET (per testing - accés ràpid)
+Route::get('/logout', function () {
+    auth()->logout();
+    request()->session()->invalidate();
+    request()->session()->regenerateToken();
+    return redirect('/login');
+})->name('quick.logout');
+
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])
     ->middleware('guest')
     ->name('login');
@@ -87,7 +95,12 @@ Route::get('/preview/graduacio', function () {
 |--------------------------------------------------------------------------
 */
 
+// Ruta para usuarios sin permisos de admin (temporal - preparada para otra vista)
 Route::middleware(['auth'])->group(function () {
+    Route::view('menu-user', 'livewire.menu-user')->name('menu_user');
+});
+
+Route::middleware(['auth', 'admin.perm'])->group(function () {
 
     // Menú d'Administrador
     Route::view('menu-admin', 'livewire.menu')->name('menu_admin');
