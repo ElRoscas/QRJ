@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="ca">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Graduació La Salle Mollerussa</title>
-    <link rel="stylesheet" href="{{ asset('css/graduacio.css') }}">
+    @vite(['resources/css/graduacio.css'])
     <script src="https://unpkg.com/html5-qrcode"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
+
 <body>
     <div class="desktop-wrapper">
         <div class="main-container">
             <div class="left-panel" id="starContainer">
                 <div class="brand-content">
                     <h1 class="main-title">
-                        LA SALLE 
+                        LA SALLE
                         <img src="{{ asset('images/estrella.png') }}" class="floating-star" alt="★">
                     </h1>
                     <h1 class="main-title">MOLLERUSSA</h1>
@@ -24,7 +26,7 @@
 
             <div class="right-panel">
                 <h1 class="page-title-black">LECTOR QR</h1>
-                
+
                 <div class="stats-grid">
                     <div class="stat-card">
                         <span class="label">Alumnes arribats</span>
@@ -53,11 +55,13 @@
                 </div>
 
                 <div class="footer-nav">
-                    <a href="{{ route('preview.menu_admin') }}" class="back-pill"> < Tornar enrere</a>
+                    <a href="{{ route('preview.menu_admin') }}" class="back-pill">
+                        < Tornar enrere</a>
                 </div>
             </div>
         </div>
     </div>
     <script src="{{ asset('js/graduacio.js') }}"></script>
 </body>
+
 </html>

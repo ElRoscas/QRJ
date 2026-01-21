@@ -1,0 +1,200 @@
+/* --- CONFIGURACIÓ BASE --- */
+body,
+html {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    font-family: 'Arial Black', sans-serif;
+    background-color: #0d1117;
+}
+
+.desktop-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 15px;
+}
+
+.main-container {
+    width: 1050px;
+    height: 680px;
+    display: flex;
+    background-color: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+}
+
+/* --- PANEL ESQUERRE --- */
+.left-panel {
+    flex: 1.2;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-left: 50px;
+    background-size: cover;
+    background-position: center;
+    background-image: linear-gradient(rgba(59, 78, 141, 0.8), rgba(59, 78, 141, 0.8)), url('/fondos.png');
+}
+
+.main-title {
+    color: #000;
+    font-size: 3.2rem;
+    font-weight: 900;
+    margin: 0;
+    line-height: 0.9;
+    position: relative;
+    z-index: 2;
+}
+
+.floating-star {
+    width: 70px;
+    position: absolute;
+    top: -5px;
+    right: 35px;
+    z-index: -1;
+    transform: rotate(15deg);
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.admin-subtitle {
+    color: #fff;
+    font-size: 1.1rem;
+    margin-top: 30px;
+    text-transform: uppercase;
+}
+
+/* --- PANEL DRET --- */
+.right-panel {
+    flex: 1;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.page-title-black {
+    font-size: 2rem;
+    color: #000;
+    margin-bottom: 20px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.stat-card {
+    background-color: #f4f6f9;
+    padding: 10px;
+    border-radius: 12px;
+    text-align: center;
+    border-left: 4px solid #c5ae66;
+}
+
+.stat-card.highlight {
+    background-color: #3b4e8d;
+    border-left-color: #000;
+}
+
+.stat-card.highlight .label,
+.stat-card.highlight .value {
+    color: #fff;
+}
+
+.label {
+    display: block;
+    font-size: 0.6rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: #555;
+}
+
+.value {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: #000;
+}
+
+#reader-frame {
+    width: 100%;
+    max-width: 300px;
+    border: 3px solid #000;
+    border-radius: 15px;
+    overflow: hidden;
+    background: #000;
+}
+
+#feedback-display {
+    margin-top: 10px;
+    font-weight: bold;
+    text-align: center;
+    color: #3b4e8d;
+    font-size: 0.9rem;
+}
+
+.back-pill {
+    display: inline-block;
+    background: #000;
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    margin-top: auto;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 1024px) {
+    .main-container {
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+    }
+
+    .left-panel {
+        padding: 40px 20px;
+        justify-content: center;
+        text-align: center;
+        min-height: 200px;
+    }
+
+    .main-title {
+        font-size: 2.5rem;
+    }
+
+    .floating-star {
+        right: 10%;
+    }
+
+    .right-panel {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .main-title {
+        font-size: 2rem;
+    }
+
+    #reader-frame {
+        max-width: 100%;
+    }
+}
+
+.bg-star {
+    position: absolute;
+    color: rgba(255, 255, 255, 0.15);
+    z-index: 1;
+    pointer-events: none;
+}

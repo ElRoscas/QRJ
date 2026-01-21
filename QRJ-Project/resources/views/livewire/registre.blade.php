@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="ca">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registre - La Salle Mollerussa</title>
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    @vite(['resources/css/registre.css'])
 </head>
+
 <body>
     <div class="desktop-wrapper">
         <div class="main-container">
             <div class="left-panel" id="starContainer">
                 <div class="brand-content">
                     <h1 class="main-title">
-                        LA SALLE 
+                        LA SALLE
                         <img src="{{ asset('estrella.png') }}" class="floating-star" alt="★">
                     </h1>
                     <h1 class="main-title">MOLLERUSSA</h1>
@@ -23,7 +25,7 @@
             <div class="right-panel">
                 <div class="form-box">
                     <h1 class="form-heading-black">REGISTRE</h1>
-                    
+
                     <form action="#" method="POST" class="registration-form">
                         @csrf
                         <div class="input-group">
@@ -46,7 +48,7 @@
                             <label>Repetir Contrasenya :</label>
                             <input type="password" name="password_confirmation" placeholder="********" required>
                         </div>
-                        
+
                         <div class="login-redirect">
                             <span>O Inicia Sessió:</span>
                             <button type="submit" class="log-in-btn">LOG IN</button>
@@ -54,7 +56,8 @@
                     </form>
 
                     <p class="back-link">
-                        <a href="{{ url('/') }}"> < Tornar enrere</a>
+                        <a href="{{ url('/') }}">
+                            < Tornar enrere</a>
                     </p>
                 </div>
             </div>
@@ -79,4 +82,5 @@
         };
     </script>
 </body>
+
 </html>

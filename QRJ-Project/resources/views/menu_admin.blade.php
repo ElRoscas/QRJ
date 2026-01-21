@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="ca">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menú Admin - La Salle Mollerussa</title>
-    <link rel="stylesheet" href="{{ asset('css/menu_admin.css') }}">
+    @vite(['resources/css/menu_admin.css'])
 </head>
+
 <body>
     <div class="desktop-wrapper">
         <div class="main-container">
             <div class="left-panel" id="starContainer">
                 <div class="brand-content">
                     <h1 class="main-title">
-                        LA SALLE 
+                        LA SALLE
                         <img src="{{ asset('estrella.png') }}" class="star-img" alt="estrella">
                     </h1>
                     <h1 class="main-title">MOLLERUSSA</h1>
@@ -23,7 +25,7 @@
             <div class="right-panel">
                 <div class="menu-box-content">
                     <h1 class="menu-title">MENÚ <span class="star-accent-inline"></span></h1>
-                    
+
                     <div class="menu-grid">
                         <div class="menu-item" onclick="location.href='{{ route('evenimente') }}'">
                             <div class="icon-card">📅</div>
@@ -44,7 +46,8 @@
                     </div>
 
                     <div class="footer-nav">
-                        <a href="{{ route('home') }}" class="back-btn"> < Tornar enrere</a>
+                        <a href="{{ route('home') }}" class="back-btn">
+                            < Tornar enrere</a>
                     </div>
                 </div>
             </div>
@@ -52,4 +55,5 @@
     </div>
     <script src="{{ asset('js/menu_admin.js') }}"></script>
 </body>
+
 </html>
