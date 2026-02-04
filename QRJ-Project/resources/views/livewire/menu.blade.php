@@ -37,9 +37,23 @@
 
                 <div class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition">
                     <h2 class="text-xl font-bold mb-2 text-gray-800">Esdeveniments</h2>
-                    <p class="text-gray-600 mb-4">Gestionar tots els eventos</p>
-                    <a href="{{ route('evenimente.llistar') }}"
+                    <p class="text-gray-600 mb-4">Gestionar tots els events</p>
+                    <a href="{{ route('esdeveniments.llistar') }}"
                         class="text-blue-600 hover:text-blue-800 font-semibold">Anar &rarr;</a>
+                </div>
+
+                <div class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition">
+                    <h2 class="text-xl font-bold mb-2 text-gray-800">🎯 Crear QR</h2>
+                    <p class="text-gray-600 mb-4">Generar codis QR per esdeveniments</p>
+                    <a href="{{ route('qr.create') }}" class="text-green-600 hover:text-green-800 font-semibold">Anar
+                        &rarr;</a>
+                </div>
+
+                <div class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition">
+                    <h2 class="text-xl font-bold mb-2 text-gray-800">📱 Llegir QR</h2>
+                    <p class="text-gray-600 mb-4">Escanejar i verificar codis QR</p>
+                    <a href="{{ route('qr.read') }}" class="text-purple-600 hover:text-purple-800 font-semibold">Anar
+                        &rarr;</a>
                 </div>
 
                 <div class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition">

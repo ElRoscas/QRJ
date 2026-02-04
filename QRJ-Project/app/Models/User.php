@@ -47,7 +47,7 @@ class User extends Authenticatable
      *
      * @var bool
      */
-    public $timestamps = false;
+    public $timestamps = true;
 
     /**
      * The attributes that are mass assignable.
@@ -59,6 +59,9 @@ class User extends Authenticatable
         'Correu',
         'Contrasenya',
         'Curs',
+        'qr_code',
+        'has_qr',
+        'qr_status',
     ];
 
     /**
@@ -112,7 +115,7 @@ class User extends Authenticatable
      */
     public function getRememberTokenName()
     {
-        return null; // Desactivar remember token si no tienes columna en la BD
+        return 'remember_token';
     }
 
     /**

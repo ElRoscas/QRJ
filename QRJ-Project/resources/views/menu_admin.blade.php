@@ -27,11 +27,11 @@
                     <h1 class="menu-title">MENÚ <span class="star-accent-inline"></span></h1>
 
                     <div class="menu-grid">
-                        <div class="menu-item" onclick="location.href='{{ route('evenimente') }}'">
+                        <div class="menu-item" onclick="location.href='{{ route('esdeveniment.index') }}'">
                             <div class="icon-card">📅</div>
                             <p>Esdeveniments</p>
                         </div>
-                        <div class="menu-item" onclick="location.href='{{ route('event.create') }}'">
+                        <div class="menu-item" onclick="location.href='{{ route('esdeveniment.create') }}'">
                             <div class="icon-card">📅<span>+</span></div>
                             <p>Crear Events</p>
                         </div>

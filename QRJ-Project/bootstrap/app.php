@@ -13,6 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
             'admin.perm' => \App\Http\Middleware\EnsureAdminPerm::class,
+            'redirect.after.login' => \App\Http\Middleware\RedirectAfterLogin::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

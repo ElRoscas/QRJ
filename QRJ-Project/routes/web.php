@@ -1,11 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\CustomRegisterController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\EsdevenimentController;
-use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
-use Laravel\Fortify\Features;
+use App\Http\Controllers\QrCodeController;
 use Livewire\Volt\Volt;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,15 +31,17 @@ Route::get('/', function () {
 })->name('home');
 
 // Rutes de Login
-Route::post('/login', [AuthenticatedSessionController::class, 'store'])
+Route::post('/login', [LoginController::class, 'store'])
     ->middleware('guest')
     ->name('fortify.login');
 
-Route::get('/login', [AuthenticatedSessionController::class, 'create'])
+Route::get('/login', function () {
+    return view('livewire.auth.login');
+})
     ->middleware('guest')
     ->name('login');
 
-Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
+Route::post('/logout', [LoginController::class, 'destroy'])
     ->middleware('auth')
     ->name('fortify.logout');
 
@@ -70,14 +74,14 @@ Route::get('/preview/control-usuaris', function () {
 
 Route::get('/preview/info-usuaris', function () {
     return view('info_user');
-})->name('info.user', ['user' => 1]);
+})->name('info.user');
 
 Route::get('/preview/crear-esdeveniment', function () {
     return view('CrearEsdeveniments');
 })->name('preview.crear_esdeveniment');
 
 Route::get('/preview/control-convidats', function () {
-    return view('control_convidats');
+    return view('control_convidats', ['guests' => []]);
 })->name('control.convidats');
 
 Route::get('/preview/menu-user', function () {
@@ -100,6 +104,9 @@ Route::middleware(['auth'])->group(function () {
 
     // Llista d'esdeveniments per a usuaris
     Route::get('esdeveniments', [EsdevenimentController::class, 'index'])->name('esdeveniments');
+
+    // Alias per llistar esdeveniments (usuaris i admin)
+    Route::get('esdeveniments/llistar', [EsdevenimentController::class, 'index'])->name('esdeveniments.llistar');
 });
 
 /*
@@ -125,13 +132,22 @@ Route::middleware(['auth', 'admin.perm'])->group(function () {
     Route::put('admin/esdeveniments/{esdeveniment}', [EsdevenimentController::class, 'update'])->name('esdeveniment.update');
     Route::delete('admin/esdeveniments/{esdeveniment}', [EsdevenimentController::class, 'destroy'])->name('esdeveniment.destroy');
 
-    // Volt routes (si las necesitas)
-    Volt::route('evenimente', 'llistar-esdeveniments')->name('evenimente.llistar');
-    Volt::route('acontecimentos/crear', 'crear-esdeveniment')->name('evenimente.crear');
-    Volt::route('događaji/{acontecimento}/editar', 'crear-esdeveniment')->name('události.editar');
+    // Volt routes removed - using controller routes instead
 
-    // Control d'accessos (Lector QR)
-    Route::view('lector-qr', 'livewire.qr')->name('lector_qr');
+    // Codis QR
+    Route::prefix('qr')->group(function () {
+        Route::get('/create', [QrCodeController::class, 'create'])->name('qr.create');
+        Route::post('/create', [QrCodeController::class, 'store'])->name('qr.store');
+        Route::get('/read', [QrCodeController::class, 'read'])->name('qr.read');
+        Route::post('/decode', [QrCodeController::class, 'decode'])->name('qr.decode');
+        Route::get('/scanner', [QrCodeController::class, 'scanner'])->name('qr.scanner');
+        Route::post('/process-scan', [QrCodeController::class, 'processScan'])->name('qr.process');
+    });
+
+    // Control d'accessos (Lector QR) - redirect to scanner
+    Route::get('lector-qr', function () {
+        return redirect()->route('qr.scanner');
+    })->name('lector_qr');
 
     // Dashboard
     Route::view('dashboard', 'dashboard')
@@ -145,9 +161,11 @@ Route::middleware(['auth', 'admin.perm'])->group(function () {
     Volt::route('settings/appearance', 'settings.appearance')->name('appearance.edit');
 
     // GET logout route para testing ràpid
-    Route::get('/logout', function () {
-        auth()->logout();
-        return redirect('/')->with('status', 'Has tancat sessió correctament.');
+    Route::get('/logout', function (Request $request) {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/login')->with('status', 'Has tancat sessió correctament.');
     })->name('logout_get');
 
 });

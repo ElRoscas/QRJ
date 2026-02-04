@@ -13,7 +13,9 @@ return new class extends Migration {
         Schema::create('esdeveniments', function (Blueprint $table) {
             $table->id();
             $table->string('ID_USER', 191); // Limitar longitud para FK
+            $table->string('Nom');
             $table->string('Tipus');
+            $table->integer('Nº_Invitats')->default(0);
             $table->string('Ubicacio')->nullable();
             $table->date('Data_Esdeveniment');
             $table->time('Hora_Inici');

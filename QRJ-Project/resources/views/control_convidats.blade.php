@@ -43,16 +43,18 @@
                     </div>
 
                     <div class="guest-list">
-                        @forelse($guests ?? [] as $guest)
-                            <div class="guest-entry">
-                                <div class="guest-name-tag">{{ $guest->name }}</div>
-                                <div class="guest-status">{{ $guest->status ?? 'Pendent' }}</div>
-                            </div>
-                        @empty
+                        @if(empty($guests))
                             <div class="guest-entry">
                                 <div class="guest-name-tag">No hi ha convidats registrats</div>
                             </div>
-                        @endforelse
+                        @else
+                            @foreach($guests as $guest)
+                                <div class="guest-entry">
+                                    <div class="guest-name-tag">{{ $guest->Nom ?? $guest->name ?? 'Sense nom' }}</div>
+                                    <div class="guest-status">{{ $guest->status ?? 'Pendent' }}</div>
+                                </div>
+                            @endforeach
+                        @endif
                     </div>
 
                     <div class="actions-container">
