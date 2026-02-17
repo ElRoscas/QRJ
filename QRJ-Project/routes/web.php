@@ -36,7 +36,7 @@ Route::post('/login', [LoginController::class, 'store'])
     ->name('fortify.login');
 
 Route::get('/login', function () {
-    return view('livewire.auth.login');
+    return redirect()->route('home');
 })
     ->middleware('guest')
     ->name('login');
@@ -107,6 +107,11 @@ Route::middleware(['auth'])->group(function () {
 
     // Alias per llistar esdeveniments (usuaris i admin)
     Route::get('esdeveniments/llistar', [EsdevenimentController::class, 'index'])->name('esdeveniments.llistar');
+
+    // User event registration routes
+    Route::get('events', [EsdevenimentController::class, 'userList'])->name('events.user-list');
+    Route::get('events/{event}/register', [EsdevenimentController::class, 'userRegisterForm'])->name('events.user-register');
+    Route::post('events/{event}/register', [EsdevenimentController::class, 'storeUserRegistration'])->name('events.store-registration');
 });
 
 /*
@@ -132,16 +137,40 @@ Route::middleware(['auth', 'admin.perm'])->group(function () {
     Route::put('admin/esdeveniments/{esdeveniment}', [EsdevenimentController::class, 'update'])->name('esdeveniment.update');
     Route::delete('admin/esdeveniments/{esdeveniment}', [EsdevenimentController::class, 'destroy'])->name('esdeveniment.destroy');
 
+    // Mostrar detall esdeveniment
+    Route::get('admin/esdeveniments/{esdeveniment}', [EsdevenimentController::class, 'show'])->name('esdeveniment.show');
+
     // Volt routes removed - using controller routes instead
 
     // Codis QR
     Route::prefix('qr')->group(function () {
         Route::get('/create', [QrCodeController::class, 'create'])->name('qr.create');
         Route::post('/create', [QrCodeController::class, 'store'])->name('qr.store');
+        Route::post('/send-massive', [QrCodeController::class, 'sendMassive'])->name('qr.send.massive');
         Route::get('/read', [QrCodeController::class, 'read'])->name('qr.read');
         Route::post('/decode', [QrCodeController::class, 'decode'])->name('qr.decode');
         Route::get('/scanner', [QrCodeController::class, 'scanner'])->name('qr.scanner');
         Route::post('/process-scan', [QrCodeController::class, 'processScan'])->name('qr.process');
+    });
+
+    // Gestió de Cursos
+    Route::prefix('admin/cursos')->name('cursos.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\CursController::class, 'index'])->name('index');
+        Route::get('/crear', [\App\Http\Controllers\CursController::class, 'create'])->name('create');
+        Route::post('/', [\App\Http\Controllers\CursController::class, 'store'])->name('store');
+        Route::get('/{curs}/editar', [\App\Http\Controllers\CursController::class, 'edit'])->name('edit');
+        Route::put('/{curs}', [\App\Http\Controllers\CursController::class, 'update'])->name('update');
+        Route::delete('/{curs}', [\App\Http\Controllers\CursController::class, 'destroy'])->name('destroy');
+        Route::post('/{curs}/toggle', [\App\Http\Controllers\CursController::class, 'toggleActivo'])->name('toggle');
+    });
+
+    // Gestió d'Assistents per Esdeveniment
+    Route::prefix('admin/esdeveniments/{esdeveniment}/assistents')->name('esdeveniments.assistents.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\EsdevenimentAssistentController::class, 'index'])->name('index');
+        Route::post('/', [\App\Http\Controllers\EsdevenimentAssistentController::class, 'store'])->name('store');
+        Route::post('/massive', [\App\Http\Controllers\EsdevenimentAssistentController::class, 'assignMassive'])->name('massive');
+        Route::put('/{assistent}', [\App\Http\Controllers\EsdevenimentAssistentController::class, 'update'])->name('update');
+        Route::delete('/{assistent}', [\App\Http\Controllers\EsdevenimentAssistentController::class, 'destroy'])->name('destroy');
     });
 
     // Control d'accessos (Lector QR) - redirect to scanner
@@ -165,7 +194,7 @@ Route::middleware(['auth', 'admin.perm'])->group(function () {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/login')->with('status', 'Has tancat sessió correctament.');
+        return redirect()->route('home')->with('status', 'Has tancat sessió correctament.');
     })->name('logout_get');
 
 });

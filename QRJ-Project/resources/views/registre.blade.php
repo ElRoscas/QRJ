@@ -69,7 +69,7 @@
 
                         <div class="login-redirect">
                             <span>O Inicia Sessió:</span>
-                            <button type="button" class="log-in-btn" onclick="location.href='{{ route('login') }}'">LOG
+                            <button type="button" class="log-in-btn" onclick="location.href='{{ route('home') }}'">LOG
                                 IN</button>
                         </div>
 

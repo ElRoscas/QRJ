@@ -68,6 +68,29 @@
                         <p class="text-gray-500 text-sm mt-1">Només es mostren usuaris sense QR assignat</p>
                     </div>
 
+                    <!-- Selector d'esdeveniment -->
+                    <div class="mb-4">
+                        <label for="esdeveniment_id" class="block text-gray-700 font-semibold mb-2">
+                            <i class="bi bi-calendar-event"></i> Selecciona l'esdeveniment *
+                        </label>
+                        <select
+                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 @error('esdeveniment_id') border-red-500 @enderror"
+                            id="esdeveniment_id" name="esdeveniment_id" required>
+                            <option value="">-- Selecciona un esdeveniment --</option>
+                            @foreach($esdeveniments as $esdeveniment)
+                                <option value="{{ $esdeveniment->id }}">
+                                    {{ $esdeveniment->Nom }} - {{ $esdeveniment->Data_Esdeveniment->format('d/m/Y') }}
+                                    (Max: {{ $esdeveniment->max_qrs_per_usuari }}
+                                    QR{{ $esdeveniment->max_qrs_per_usuari > 1 ? 's' : '' }} per usuari)
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('esdeveniment_id')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                        <p class="text-gray-500 text-sm mt-1">Només es mostren esdeveniments propers</p>
+                    </div>
+
                     <!-- Mida -->
                     <div class="mb-4">
                         <label for="size" class="block text-gray-700 font-semibold mb-2">
@@ -93,6 +116,27 @@
                         </label>
                         <p class="text-gray-500 text-sm mt-1 ml-7">El QR s'enviarà automàticament al correu de l'usuari
                             seleccionat</p>
+                    </div>
+
+                    <!-- Contingut del correu (opcional) -->
+                    <div class="mb-4">
+                        <label for="email_subject" class="block text-gray-700 font-semibold mb-2">
+                            <i class="bi bi-card-text"></i> Assumpte del correu (opcional)
+                        </label>
+                        <input type="text" id="email_subject" name="email_subject" value="{{ old('email_subject') }}"
+                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <p class="text-gray-500 text-sm mt-1">Si es deixa en blanc, s'utilitzarà l'assumpte per defecte.
+                        </p>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="email_body" class="block text-gray-700 font-semibold mb-2">
+                            <i class="bi bi-body-text"></i> Contingut del correu (opcional)
+                        </label>
+                        <textarea id="email_body" name="email_body" rows="4"
+                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">{{ old('email_body') }}</textarea>
+                        <p class="text-gray-500 text-sm mt-1">Pots personalitzar el missatge que rebrà l'usuari. El codi
+                            QR s'adjuntarà automàticament com a imatge.</p>
                     </div>
 
                     <!-- Botons -->

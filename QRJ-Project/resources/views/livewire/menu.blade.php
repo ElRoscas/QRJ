@@ -5,62 +5,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menú Admin</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/menu_admin.css'])
 </head>
 
-<body class="font-sans antialiased bg-gray-50">
-    <div class="min-h-screen">
-        <nav class="bg-white shadow-md">
-            <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-                <h1 class="text-2xl font-bold text-gray-800">Menú d'Administració</h1>
-                <div class="flex items-center gap-4">
-                    <span class="text-gray-700">{{ auth()->user()->Nom ?? 'usuari' }}</span>
-                    <form method="POST" action="{{ route('fortify.logout') }}" class="inline">
-                        @csrf
-                        <button type="submit"
-                            class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded">
-                            Tancar sessió
-                        </button>
-                    </form>
+<body>
+    <div class="desktop-wrapper">
+        <div class="main-container">
+            <div class="left-panel" id="starContainer">
+                <div class="brand-content">
+                    <h1 class="main-title">
+                        LA SALLE
+                        <img src="{{ asset('images/estrella.png') }}" class="star-img" alt="estrella">
+                    </h1>
+                    <h1 class="main-title">MOLLERUSSA</h1>
+                    <h2 class="admin-subtitle">ADMINISTRADOR D'ESDEVENIMENTS</h2>
                 </div>
             </div>
-        </nav>
 
-        <div class="max-w-6xl mx-auto p-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition">
-                    <h2 class="text-xl font-bold mb-2 text-gray-800">Dashboard</h2>
-                    <p class="text-gray-600 mb-4">Veure informació general</p>
-                    <a href="{{ route('dashboard') }}" class="text-blue-600 hover:text-blue-800 font-semibold">Anar
-                        &rarr;</a>
-                </div>
+            <div class="right-panel">
+                <div class="menu-box-content">
+                    <div class="menu-header">
+                        <div>
+                            <h1 class="menu-title">MENÚ</h1>
+                            <p class="menu-subtitle">Administració</p>
+                        </div>
+                        <div class="menu-actions">
+                            <span class="user-pill">{{ auth()->user()->Nom ?? 'usuari' }}</span>
+                            <form method="POST" action="{{ route('fortify.logout') }}">
+                                @csrf
+                                <button type="submit" class="logout-btn">Tancar sessió</button>
+                            </form>
+                        </div>
+                    </div>
 
-                <div class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition">
-                    <h2 class="text-xl font-bold mb-2 text-gray-800">Esdeveniments</h2>
-                    <p class="text-gray-600 mb-4">Gestionar tots els events</p>
-                    <a href="{{ route('esdeveniments.llistar') }}"
-                        class="text-blue-600 hover:text-blue-800 font-semibold">Anar &rarr;</a>
-                </div>
+                    <div class="menu-grid">
+                        <div class="menu-item" onclick="location.href='{{ route('esdeveniment.index') }}'">
+                            <div class="icon-card icon-blue">📅</div>
+                            <p>Esdeveniments</p>
+                            <span>Gestionar tots els events</span>
+                        </div>
 
-                <div class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition">
-                    <h2 class="text-xl font-bold mb-2 text-gray-800">🎯 Crear QR</h2>
-                    <p class="text-gray-600 mb-4">Generar codis QR per esdeveniments</p>
-                    <a href="{{ route('qr.create') }}" class="text-green-600 hover:text-green-800 font-semibold">Anar
-                        &rarr;</a>
-                </div>
+                        <div class="menu-item" onclick="location.href='{{ route('esdeveniment.create') }}'">
+                            <div class="icon-card icon-gold">➕</div>
+                            <p>Crear esdeveniment</p>
+                            <span>Nou event i detalls</span>
+                        </div>
 
-                <div class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition">
-                    <h2 class="text-xl font-bold mb-2 text-gray-800">📱 Llegir QR</h2>
-                    <p class="text-gray-600 mb-4">Escanejar i verificar codis QR</p>
-                    <a href="{{ route('qr.read') }}" class="text-purple-600 hover:text-purple-800 font-semibold">Anar
-                        &rarr;</a>
-                </div>
+                        <div class="menu-item" onclick="location.href='{{ route('qr.create') }}'">
+                            <div class="icon-card icon-emerald">🎯</div>
+                            <p>Crear QR</p>
+                            <span>Generar codis QR</span>
+                        </div>
 
-                <div class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition">
-                    <h2 class="text-xl font-bold mb-2 text-gray-800">Lector QR</h2>
-                    <p class="text-gray-600 mb-4">Controlar accessos</p>
-                    <a href="{{ route('lector_qr') }}" class="text-blue-600 hover:text-blue-800 font-semibold">Anar
-                        &rarr;</a>
+                        <div class="menu-item" onclick="location.href='{{ route('qr.read') }}'">
+                            <div class="icon-card icon-slate">📱</div>
+                            <p>Llegir QR</p>
+                            <span>Verificar codis</span>
+                        </div>
+                    </div>
+
+                    <div class="footer-nav">
+                        <a href="{{ route('home') }}" class="back-btn">
+                            < Tornar enrere</a>
+                    </div>
                 </div>
             </div>
         </div>

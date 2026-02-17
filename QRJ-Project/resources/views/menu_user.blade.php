@@ -27,7 +27,7 @@
                     <h1 class="menu-title">MENÚ</h1>
 
                     <div class="menu-grid">
-                        <div class="menu-item" onclick="location.href='{{ route('esdeveniments') }}'">
+                        <div class="menu-item" onclick="location.href='{{ route('events.user-list') }}'">
                             <div class="icon-card">📅</div>
                             <p>Esdeveniments</p>
                         </div>
@@ -49,8 +49,12 @@
                     </div>
 
                     <div class="footer-nav">
-                        <a href="{{ route('home') }}" class="back-btn">
-                            < Tornar enrere</a>
+                        <form method="POST" action="{{ route('fortify.logout') }}" style="display: inline;">
+                            @csrf
+                            <button type="submit" class="back-btn"
+                                style="background: none; border: none; cursor: pointer; font-size: inherit; font-family: inherit; color: inherit; padding: 0;">
+                                < Tornar enrere</button>
+                        </form>
                     </div>
                 </div>
             </div>

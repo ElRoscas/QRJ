@@ -1,5 +1,6 @@
 /* --- CONFIGURACIÓ GENERAL --- */
-body, html {
+body,
+html {
     margin: 0;
     padding: 0;
     height: 100%;
@@ -68,8 +69,15 @@ body, html {
 }
 
 @keyframes float {
-    0%, 100% { transform: translateY(0px) rotate(12deg); }
-    50% { transform: translateY(-10px) rotate(12deg); }
+
+    0%,
+    100% {
+        transform: translateY(0px) rotate(12deg);
+    }
+
+    50% {
+        transform: translateY(-10px) rotate(12deg);
+    }
 }
 
 .admin-subtitle {

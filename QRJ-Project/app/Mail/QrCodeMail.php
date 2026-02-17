@@ -15,15 +15,19 @@ class QrCodeMail extends Mailable
     public $qrContent;
     public $qrFilePath;
     public $qrFileName;
+    public $emailSubject;
+    public $emailBody;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($content, $filePath, $fileName)
+    public function __construct($content, $filePath, $fileName, $emailSubject = null, $emailBody = null)
     {
         $this->qrContent = $content;
         $this->qrFilePath = $filePath;
         $this->qrFileName = $fileName;
+        $this->emailSubject = $emailSubject ?: 'Codi QR - La Salle Mollerussa';
+        $this->emailBody = $emailBody;
     }
 
     /**
@@ -32,7 +36,7 @@ class QrCodeMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Codi QR - La Salle Mollerussa',
+            subject: $this->emailSubject,
         );
     }
 
@@ -43,6 +47,10 @@ class QrCodeMail extends Mailable
     {
         return new Content(
             view: 'emails.qr-code',
+            with: [
+                'qrContent' => $this->qrContent,
+                'emailBody' => $this->emailBody,
+            ],
         );
     }
 

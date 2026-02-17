@@ -254,6 +254,19 @@
                         </div>
 
                         <div class="form-group">
+                            <label>Curs</label>
+                            <select name="curs_id" class="form-control"
+                                style="width: 100%; padding: 12px 15px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 14px;">
+                                <option value="">-- Selecciona un curs --</option>
+                                @foreach($cursos as $curs)
+                                    <option value="{{ $curs->id }}" {{ old('curs_id') == $curs->id ? 'selected' : '' }}>
+                                        {{ $curs->nombre }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
                             <label>Contrasenya</label>
                             <input type="password" name="password" required placeholder="••••••••">
                         </div>

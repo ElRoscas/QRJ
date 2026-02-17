@@ -109,7 +109,11 @@
 
         <div class="content">
             <p>Hola,</p>
-            <p>Aquí tens el codi QR que has sol·licitat com a fitxer adjunt.</p>
+            @if(!empty($emailBody))
+                <p>{!! nl2br(e($emailBody)) !!}</p>
+            @else
+                <p>Aquí tens el codi QR que has sol·licitat com a fitxer adjunt.</p>
+            @endif
 
             <div class="attachment-notice">
                 <p><strong>📎 Fitxer adjunt</strong><br>

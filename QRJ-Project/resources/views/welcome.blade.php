@@ -33,9 +33,17 @@
                 <form action="{{ route('fortify.login') }}" method="POST">
                     @csrf
                     <div class="input-fields">
+                        @if ($errors->any())
+                            <div class="error-message">
+                                @foreach ($errors->all() as $error)
+                                    <div>{{ $error }}</div>
+                                @endforeach
+                            </div>
+                        @endif
                         <div class="field">
                             <label>Nom d'usuari o correu electrònic</label>
-                            <input type="text" name="email" placeholder="Ex: alumne@lasalle.cat" required>
+                            <input type="email" name="Correu" value="{{ old('Correu') }}"
+                                placeholder="Ex: alumne@lasalle.cat" required autofocus>
                         </div>
                         <div class="field">
                             <label>Contrasenya</label>
@@ -58,11 +66,6 @@
                 <p class="footer-link">
                     Si no tens compte, <a href="{{ route('register') }}">Registra't</a>
                 </p>
-
-                <button type="button" class="continue-without-login"
-                    onclick="location.href='{{ route('preview.menu_admin') }}'">
-                    Continuar sense login
-                </button>
             </div>
         </div>
     </div>

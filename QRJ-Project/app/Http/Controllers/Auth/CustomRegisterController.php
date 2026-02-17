@@ -16,7 +16,8 @@ class CustomRegisterController extends Controller
      */
     public function create()
     {
-        return view('livewire.auth.register');
+        $cursos = \App\Models\Curs::actius()->get();
+        return view('livewire.auth.register', compact('cursos'));
     }
 
     /**
@@ -28,6 +29,7 @@ class CustomRegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:100'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'curs_id' => ['nullable', 'exists:cursos,id'],
         ]);
 
         // Comprovar si ja existeix
@@ -42,6 +44,7 @@ class CustomRegisterController extends Controller
             'Correu' => $data['email'],
             'Contrasenya' => Hash::make($data['password']),
             'Curs' => null,
+            'curs_id' => $data['curs_id'] ?? null,
         ]);
 
         Auth::login($user);

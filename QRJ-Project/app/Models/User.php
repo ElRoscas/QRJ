@@ -59,6 +59,7 @@ class User extends Authenticatable
         'Correu',
         'Contrasenya',
         'Curs',
+        'curs_id',
         'qr_code',
         'has_qr',
         'qr_status',
@@ -136,5 +137,29 @@ class User extends Authenticatable
     public function permissos()
     {
         return $this->hasMany(Permis::class, 'ID_Usuari', 'Correu');
+    }
+
+    /**
+     * Relación con el curso
+     */
+    public function curs()
+    {
+        return $this->belongsTo(Curs::class, 'curs_id');
+    }
+
+    /**
+     * Relación con asistencias a eventos
+     */
+    public function assistenciesEsdeveniment()
+    {
+        return $this->hasMany(EsdevenimentAssistent::class, 'usuari_correu', 'Correu');
+    }
+
+    /**
+     * Relación con códigos QR
+     */
+    public function qrCodes()
+    {
+        return $this->hasMany(QrCode::class, 'usuari_correu', 'Correu');
     }
 }

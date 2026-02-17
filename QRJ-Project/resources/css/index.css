@@ -187,32 +187,6 @@ html {
     font-weight: bold;
 }
 
-.continue-without-login {
-    background: rgba(255, 195, 0, 0.15);
-    color: #ffc300;
-    border: 2px solid #ffc300;
-    padding: 12px;
-    border-radius: 25px;
-    font-weight: bold;
-    cursor: pointer;
-    width: 100%;
-    margin-top: 12px;
-    font-size: 0.95rem;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.continue-without-login:hover {
-    background: rgba(255, 195, 0, 0.25);
-    box-shadow: 0 4px 12px rgba(255, 195, 0, 0.2);
-    transform: translateY(-1px);
-}
-
-.continue-without-login:active {
-    transform: translateY(0);
-}
-
 /* --- RESPONSIVE --- */
 @media (max-width: 768px) {
     .container {

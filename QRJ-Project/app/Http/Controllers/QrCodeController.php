@@ -10,6 +10,8 @@ use Endroid\QrCode\Encoding\Encoding;
 use Endroid\QrCode\Writer\PngWriter;
 use App\Mail\QrCodeMail;
 use App\Models\User;
+use App\Models\Esdeveniment;
+use App\Models\QrCode;
 use Illuminate\Support\Str;
 
 class QrCodeController extends Controller
@@ -19,9 +21,23 @@ class QrCodeController extends Controller
      */
     public function create()
     {
-        // Obtenir usuaris que no tenen QR assignat
-        $users = User::where('has_qr', false)->get();
-        return view('qr.create', compact('users'));
+        // Obtenir tots els usuaris amb informació de curs i permisos
+        $users = User::with(['curs', 'permissos'])->orderBy('Nom')->get();
+
+        // Añadir información de admin a cada usuario
+        $users = $users->map(function ($user) {
+            $user->is_admin = $user->permissos->where('PermCode', '11111')->isNotEmpty();
+            return $user;
+        });
+
+        $cursos = \App\Models\Curs::actius()->get();
+
+        // Obtenir esdeveniments propers (data >= avui)
+        $esdeveniments = Esdeveniment::where('Data_Esdeveniment', '>=', now())
+            ->orderBy('Data_Esdeveniment')
+            ->get();
+
+        return view('qr.create', compact('users', 'cursos', 'esdeveniments'));
     }
 
     /**
@@ -31,20 +47,29 @@ class QrCodeController extends Controller
     {
         $request->validate([
             'user_id' => 'required|exists:usuari,Correu',
+            'esdeveniment_id' => 'required|exists:esdeveniments,id',
             'size' => 'nullable|integer|min:100|max:1000',
-            'send_email' => 'nullable|boolean'
+            'send_email' => 'nullable|boolean',
+            'email_subject' => 'nullable|string|max:255',
+            'email_body' => 'nullable|string',
         ]);
 
         $user = User::where('Correu', $request->user_id)->firstOrFail();
+        $esdeveniment = Esdeveniment::findOrFail($request->esdeveniment_id);
 
-        // Verificar que no tingui ja un QR
-        if ($user->has_qr) {
+        // Verificar quants QRs té l'usuari per aquest esdeveniment
+        $qrCount = QrCode::where('usuari_correu', $user->Correu)
+            ->where('esdeveniment_id', $esdeveniment->id)
+            ->count();
+
+        if ($qrCount >= $esdeveniment->max_qrs_per_usuari) {
             return redirect()->route('qr.create')
-                ->with('error', 'Aquest usuari ja té un QR assignat.');
+                ->with('error', "Aquest usuari ja té el màxim de QRs permesos ({$esdeveniment->max_qrs_per_usuari}) per aquest esdeveniment.");
         }
 
-        // Generar codi únic per l'usuari
-        $qrCode = 'USER_' . Str::upper(Str::random(16));
+        // Generar codi únic per l'usuari amb format: ESDEVENIMENT - NOM #1
+        $qrNumber = $qrCount + 1;
+        $qrCode = strtoupper($esdeveniment->Nom) . ' - ' . strtoupper($user->Nom) . ' #' . $qrNumber;
         $size = $request->size ?? 300;
 
         // Generar QR amb endroid/qr-code v6
@@ -61,7 +86,15 @@ class QrCodeController extends Controller
         // Convertir PNG a base64 per mostrar-lo
         $base64Image = base64_encode($result->getString());
 
-        // Actualitzar usuari amb el codi QR
+        // Crear registre del QR a la base de dades
+        QrCode::create([
+            'usuari_correu' => $user->Correu,
+            'esdeveniment_id' => $esdeveniment->id,
+            'qr_code' => $qrCode,
+            'qr_sent' => (bool) $request->send_email,
+        ]);
+
+        // Actualitzar usuari amb l'últim codi QR (per compatibilitat)
         $user->update([
             'qr_code' => $qrCode,
             'has_qr' => true,
@@ -83,7 +116,10 @@ class QrCodeController extends Controller
                 // Guardar el fitxer
                 file_put_contents($path, $result->getString());
 
-                Mail::to($user->Correu)->send(new QrCodeMail($user->Nom, $path, $filename));
+                $emailSubject = $request->email_subject ?: 'Codi QR - La Salle Mollerussa';
+                $emailBody = $request->email_body;
+
+                Mail::to($user->Correu)->send(new QrCodeMail($user->Nom, $path, $filename, $emailSubject, $emailBody));
 
                 // Eliminar el fitxer temporal després d'enviar
                 if (file_exists($path)) {
@@ -242,5 +278,108 @@ class QrCodeController extends Controller
             'message' => 'QR processat correctament',
             'data' => $data
         ]);
+    }
+
+    /**
+     * Envío masivo de QR codes
+     */
+    public function sendMassive(Request $request)
+    {
+        $request->validate([
+            'user_ids' => 'required|array',
+            'user_ids.*' => 'exists:usuari,Correu',
+            'esdeveniment_id' => 'required|exists:esdeveniments,id',
+            'size' => 'nullable|integer|min:100|max:1000',
+        ]);
+
+        $esdeveniment = Esdeveniment::findOrFail($request->esdeveniment_id);
+        $size = $request->size ?? 300;
+        $successCount = 0;
+        $errorCount = 0;
+        $errors = [];
+
+        foreach ($request->user_ids as $correuUsuari) {
+            $user = User::where('Correu', $correuUsuari)->first();
+
+            if (!$user) {
+                $errorCount++;
+                $errors[] = "Usuari no trobat: $correuUsuari";
+                continue;
+            }
+
+            try {
+                // Comprovar quants QRs té l'usuari per aquest esdeveniment
+                $qrCount = QrCode::where('usuari_correu', $user->Correu)
+                    ->where('esdeveniment_id', $esdeveniment->id)
+                    ->count();
+
+                if ($qrCount >= $esdeveniment->max_qrs_per_usuari) {
+                    $errorCount++;
+                    $errors[] = "{$user->Nom} ja té el màxim de QRs permesos ({$esdeveniment->max_qrs_per_usuari}) per aquest esdeveniment.";
+                    continue;
+                }
+
+                // Generar codi únic per l'usuari amb format semblant al mètode store
+                $qrNumber = $qrCount + 1;
+                $qrCode = strtoupper($esdeveniment->Nom) . ' - ' . strtoupper($user->Nom) . ' #' . $qrNumber;
+
+                // Generar QR
+                $builder = new Builder(
+                    writer: new PngWriter(),
+                    data: $qrCode,
+                    encoding: new Encoding('UTF-8'),
+                    size: $size,
+                    margin: 10
+                );
+
+                $result = $builder->build();
+
+                // Crear registre del QR a la base de dades per a aquest esdeveniment
+                QrCode::create([
+                    'usuari_correu' => $user->Correu,
+                    'esdeveniment_id' => $esdeveniment->id,
+                    'qr_code' => $qrCode,
+                    'qr_sent' => true,
+                ]);
+
+                // Actualitzar usuari (compatibilitat)
+                $user->update([
+                    'qr_code' => $qrCode,
+                    'has_qr' => true,
+                    'qr_status' => 'fora'
+                ]);
+
+                // Guardar temporalmente y enviar email
+                $filename = 'qr_' . $user->Correu . '_' . time() . '.png';
+                $path = storage_path('app/public/temp/' . $filename);
+
+                if (!file_exists(storage_path('app/public/temp'))) {
+                    mkdir(storage_path('app/public/temp'), 0755, true);
+                }
+
+                file_put_contents($path, $result->getString());
+
+                Mail::to($user->Correu)->send(new QrCodeMail($user->Nom, $path, $filename));
+
+                // Eliminar archivo temporal
+                if (file_exists($path)) {
+                    unlink($path);
+                }
+
+                $successCount++;
+            } catch (\Exception $e) {
+                $errorCount++;
+                $errors[] = "{$user->Nom}: " . $e->getMessage();
+            }
+        }
+
+        $message = "QR enviats: $successCount";
+        if ($errorCount > 0) {
+            $message .= " | Errors: $errorCount";
+        }
+
+        return redirect()->route('qr.create')
+            ->with('success', $message)
+            ->with('errors', $errors);
     }
 }

@@ -18,6 +18,7 @@ export default defineConfig({
                 'resources/css/graduacio.css',
                 'resources/css/esdeveniments.css',
                 'resources/css/crear_esdeveniments.css',
+                'resources/css/esdeveniment_detall.css',
                 'resources/js/app.js',
             ],
             refresh: true,
