@@ -37,10 +37,13 @@ Route::post('/login', [LoginController::class, 'store'])
 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 Route::get('/login', function () {
     return redirect()->route('home');
 })
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 // Logout via GET (per testing - accés ràpid)
@@ -117,6 +120,7 @@ Route::get('/preview/graduacio', function () {
 Route::middleware(['auth'])->group(function () {
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     // Menú per a usuaris sense permisos
     Route::view('menu-user', 'menu_user')->name('menu_user');
 
@@ -138,6 +142,11 @@ Route::middleware(['auth'])->group(function () {
 |--------------------------------------------------------------------------
 */
 
+=======
+    Route::view('menu-user', 'livewire.menu-user')->name('menu_user');
+});
+
+>>>>>>> Stashed changes
 =======
     Route::view('menu-user', 'livewire.menu-user')->name('menu_user');
 });

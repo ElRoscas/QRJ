@@ -17,6 +17,7 @@ class EnsureAdminPerm
     {
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         // Verificar si el usuario está autenticado
         if (!auth()->check()) {
             return redirect()->route('login');
@@ -37,6 +38,8 @@ class EnsureAdminPerm
 =======
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
         $user = auth()->user();
 
         // Si no está autenticado, redirigir al login
@@ -51,6 +54,9 @@ class EnsureAdminPerm
             // Si no tiene permisos, redirigir a menu de usuario
             return redirect()->route('menu_user');
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
