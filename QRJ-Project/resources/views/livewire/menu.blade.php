@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menú Admin</title>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     @vite(['resources/css/menu_admin.css'])
 </head>
 
@@ -73,6 +74,8 @@
             </div>
         </div>
 =======
+=======
+>>>>>>> Stashed changes
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
@@ -93,6 +96,9 @@
             <li><a class="text-blue-600 underline" href="{{ route('esdeveniments.llistar') }}">Esdeveniments</a></li>
             <li><a class="text-blue-600 underline" href="{{ route('lector_qr') }}">Lector QR</a></li>
         </ul>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     </div>
 </body>

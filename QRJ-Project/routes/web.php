@@ -36,10 +36,13 @@ Route::post('/login', [LoginController::class, 'store'])
     ->name('fortify.login');
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 Route::get('/login', function () {
     return redirect()->route('home');
 })
 =======
+=======
+>>>>>>> Stashed changes
 // Logout via GET (per testing - accés ràpid)
 Route::get('/logout', function () {
     auth()->logout();
@@ -113,6 +116,7 @@ Route::get('/preview/graduacio', function () {
 // Ruta para usuarios sin permisos de admin (temporal - preparada para otra vista)
 Route::middleware(['auth'])->group(function () {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     // Menú per a usuaris sense permisos
     Route::view('menu-user', 'menu_user')->name('menu_user');
 
@@ -134,6 +138,11 @@ Route::middleware(['auth'])->group(function () {
 |--------------------------------------------------------------------------
 */
 
+=======
+    Route::view('menu-user', 'livewire.menu-user')->name('menu_user');
+});
+
+>>>>>>> Stashed changes
 =======
     Route::view('menu-user', 'livewire.menu-user')->name('menu_user');
 });

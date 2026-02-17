@@ -16,6 +16,7 @@ class EnsureAdminPerm
     public function handle(Request $request, Closure $next): Response
     {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         // Verificar si el usuario está autenticado
         if (!auth()->check()) {
             return redirect()->route('login');
@@ -34,6 +35,8 @@ class EnsureAdminPerm
             return redirect()->route('menu_user')
                 ->with('status', 'No tens permisos d\'administrador.');
 =======
+=======
+>>>>>>> Stashed changes
         $user = auth()->user();
 
         // Si no está autenticado, redirigir al login
@@ -47,6 +50,9 @@ class EnsureAdminPerm
         if (!$hasAdminPerm) {
             // Si no tiene permisos, redirigir a menu de usuario
             return redirect()->route('menu_user');
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
         }
 

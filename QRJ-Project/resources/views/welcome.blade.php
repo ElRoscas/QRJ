@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     <title>La Salle Mollerussa - Accés</title>
 
     <link rel="icon" type="image/png" href="{{ asset('estrella.png') }}">
@@ -22,6 +23,17 @@
             box-sizing: border-box;
         }
 
+=======
+    <title>Iniciar Sessió - La Salle Mollerussa</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+>>>>>>> Stashed changes
         body {
             font-family: 'Arial', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -221,11 +233,15 @@
             font-size: 14px;
         }
     </style>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 </head>
 
 <body>
     <div class="desktop-wrapper">
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
         <div class="container">
             <div class="left-side" id="mainContainer">
@@ -234,12 +250,17 @@
                         LA SALLE
                         <img src="{{ asset('estrella.png') }}" class="star-img" alt="Estrella">
 =======
+=======
+>>>>>>> Stashed changes
         <div class="main-container">
             <div class="left-panel">
                 <div class="brand-content">
                     <h1 class="main-title">
                         LA SALLE
                         <img src="{{ asset('images/estrella.png') }}" class="floating-star" alt="★">
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
                     </h1>
                     <h1 class="main-title">MOLLERUSSA</h1>
@@ -247,6 +268,7 @@
                 </div>
             </div>
 
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
             <div class="right-side">
                 <h2 class="form-title">Iniciar sessió</h2>
@@ -299,6 +321,19 @@
                         </div>
                     @endif
 
+=======
+            <div class="right-panel">
+                <div class="login-box">
+                    <h1>INICIAR SESSIÓ</h1>
+
+                    <!-- Session Status -->
+                    @if (session('status'))
+                        <div class="success-message">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+
+>>>>>>> Stashed changes
                     <!-- Validation Errors -->
                     @if ($errors->any())
                         <div class="error-message">
@@ -343,6 +378,9 @@
                         </div>
                     @endif
                 </div>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
             </div>
         </div>

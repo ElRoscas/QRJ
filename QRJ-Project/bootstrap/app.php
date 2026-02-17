@@ -14,7 +14,10 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'admin.perm' => \App\Http\Middleware\EnsureAdminPerm::class,
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             'redirect.after.login' => \App\Http\Middleware\RedirectAfterLogin::class,
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
         ]);
