@@ -15,6 +15,7 @@ class EnsureAdminPerm
      */
     public function handle(Request $request, Closure $next): Response
     {
+<<<<<<< Updated upstream
         // Verificar si el usuario está autenticado
         if (!auth()->check()) {
             return redirect()->route('login');
@@ -32,6 +33,21 @@ class EnsureAdminPerm
         if (!$hasAdminPerm) {
             return redirect()->route('menu_user')
                 ->with('status', 'No tens permisos d\'administrador.');
+=======
+        $user = auth()->user();
+
+        // Si no está autenticado, redirigir al login
+        if (!$user) {
+            return redirect()->route('login');
+        }
+
+        // Verificar si tiene el permiso de admin (PermCode = '11111')
+        $hasAdminPerm = $user->permissos()->where('PermCode', '11111')->exists();
+
+        if (!$hasAdminPerm) {
+            // Si no tiene permisos, redirigir a menu de usuario
+            return redirect()->route('menu_user');
+>>>>>>> Stashed changes
         }
 
         return $next($request);
